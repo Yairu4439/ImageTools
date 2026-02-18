@@ -1,0 +1,71 @@
+.main-layout {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient gradient orbs — wine (top-left) and sky (bottom-right) */
+.main-layout::before,
+.main-layout::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(120px);
+    opacity: 0.15;
+}
+
+.main-layout::before {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--wine-500) 0%, transparent 70%);
+    top: -150px;
+    left: -150px;
+}
+
+.main-layout::after {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--sky-400) 0%, transparent 70%);
+    bottom: -100px;
+    right: -100px;
+}
+
+[data-theme="dark"] .main-layout::before,
+[data-theme="dark"] .main-layout::after {
+    opacity: 0.20;
+}
+
+.main-content {
+    flex: 1;
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    margin-top: var(--header-height);
+}
+
+.footer {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-card);
+    font-size: var(--fs-small);
+}
+
+@media (max-width: 767px) {
+    .main-content {
+        padding: 1.25rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem 0.75rem;
+    }
+}

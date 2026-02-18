@@ -1,0 +1,21 @@
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    border: 1px solid var(--border-color);
+}
+
+.card:hover,
+.card-interactive:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 1rem;
+        border-radius: var(--radius-md);
+    }
+}

@@ -1,0 +1,156 @@
+/* ── Image Comparison Slider ── */
+
+.comparison-slider {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    cursor: col-resize;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+/* Checkerboard transparency pattern (inside the "after" layer) */
+.comparison-slider__checkerboard {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    background-color: #fff;
+    z-index: 0;
+}
+
+/* Both image layers */
+.comparison-slider__before,
+.comparison-slider__after {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Before (original) sits at the bottom */
+.comparison-slider__before {
+    position: relative;
+    z-index: 1;
+}
+
+/* After (processed) overlays with clip-path */
+.comparison-slider__after-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.comparison-slider__after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* ── Divider line ── */
+.comparison-slider__divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #fff;
+    z-index: 4;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+}
+
+/* ── Handle (circle on divider) ── */
+.comparison-slider__handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--primary, #333);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.comparison-slider__handle-arrow {
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.comparison-slider__handle-arrow--left {
+    border-right: 7px solid var(--primary, #333);
+}
+
+.comparison-slider__handle-arrow--right {
+    border-left: 7px solid var(--primary, #333);
+}
+
+/* ── Labels ── */
+.comparison-slider__label {
+    position: absolute;
+    bottom: 12px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full, 9999px);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.comparison-slider__label--before {
+    left: 12px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+}
+
+.comparison-slider__label--after {
+    right: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #111;
+}
+
+/* ── Mobile: labels smaller, slider fills container ── */
+@media (max-width: 480px) {
+    .comparison-slider {
+        border-radius: var(--radius-md);
+    }
+
+    .comparison-slider__label {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+        bottom: 8px;
+    }
+
+    .comparison-slider__label--before {
+        left: 8px;
+    }
+
+    .comparison-slider__label--after {
+        right: 8px;
+    }
+}
